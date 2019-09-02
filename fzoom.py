@@ -61,18 +61,19 @@ def text_command(config, word, regex, count, top_words, file):
 		word-searching, top words, etc.
 	'''
 	executed = False
+	content = file.readlines()
 	if word is not None:
-		text.search_word(file, word)
+		text.search_word(content, word)
 		executed = True
 	if regex is not None:
-		text.search_regex(file, regex)
+		text.search_regex(content, regex)
 		executed = True
 	if count:
-		text.count(file)
+		text.count(content)
 		executed = True
-	if top_words:
-		text.top_words(file, top_words)
+	if top_words is not None:
+		text.top_words(content, top_words)
 		executed = True
 
 	if not executed:
-		text.overview(file)
+		text.overview(content)
